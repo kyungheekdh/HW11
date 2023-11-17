@@ -13,8 +13,7 @@ LoL::LoL(int N1, int N2, float a, float b, float x0, float dx, int m)
 
 LoL::~LoL()
 {
-    delete _N1; delete _N2; delete _a;
-    delete _b; delete _x0; delete _dx; delete _m;
+    delete _N1, _N2, _a, _b, _x0, _dx, _m;
 }
 
 void LoL::f0(string ss)
