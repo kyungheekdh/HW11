@@ -1,4 +1,23 @@
-void LoL::f0(string ss) 
+#include "LoLCha.h"
+
+LoL::LoL(int N1, int N2, float a, float b, float x0, float dx, int m)
+{
+    _N1 = new int; *_N1 = N1;
+    _N2 = new int; *_N2 = N2;
+    _a = new float; *_a = a;
+    _b = new float; *_b = b;
+    _x0 = new float; *_x0 = x0;
+    _dx = new float; *_dx = dx;
+    _m = new int; *_m = m;
+}
+
+LoL::~LoL()
+{
+    delete _N1; delete _N2; delete _a;
+    delete _b; delete _x0; delete _dx; delete _m;
+}
+
+void LoL::f0(string ss)
 {
     dd.open(ss, ios::binary | ios::out);
     dd.write((char*)&(*_N1), sizeof(int));
@@ -10,24 +29,24 @@ void LoL::f0(string ss)
     dd.write((char*)&(*_m), sizeof(int));
 }
 
-void LoL::f1() 
+void LoL::f1()
 {
     int* f1d;
     f1d = new int[*_N2 - *_N1 + 1];
-    for (int i = *_N1; i <= *_N2; i++) 
+    for (int i = *_N1; i <= *_N2; i++)
     {
         f1d[i - *_N1] = i * (i + 1) / 2;
     }
-    dd.write((char*)f1d, sizeof(int)*(*_N2 - *_N1+1));
+    dd.write((char*)f1d, sizeof(int) * (*_N2 - *_N1 + 1));
     delete f1d;
 }
 
-void LoL::f2() 
+void LoL::f2()
 {
-    float *f2d, x;
+    float* f2d, x;
     x = *_x0;
     f2d = new float[*_m];
-    for (int i = 0; i < *_m; i++ ,x += *_dx) 
+    for (int i = 0; i < *_m; i++, x += *_dx)
     {
         f2d[i] = (*_a) * x + (*_b);
     }
