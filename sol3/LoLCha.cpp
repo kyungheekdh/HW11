@@ -1,6 +1,5 @@
 #include "LoLCha.h"
-
-LoL::LoL(int N1, int N2, float a, float b, float x0, float dx, int m)
+LoL::LoL(int N1, int N2, float a, float b, float x0, float dx, int m, string ss)
 {
     _N1 = new int; *_N1 = N1;
     _N2 = new int; *_N2 = N2;
@@ -9,16 +8,9 @@ LoL::LoL(int N1, int N2, float a, float b, float x0, float dx, int m)
     _x0 = new float; *_x0 = x0;
     _dx = new float; *_dx = dx;
     _m = new int; *_m = m;
-}
+    s = ss;
 
-LoL::~LoL()
-{
-    delete _N1, _N2, _a, _b, _x0, _dx, _m;
-}
-
-void LoL::f0(string ss)
-{
-    dd.open(ss, ios::binary | ios::out);
+    dd.open(s, ios::binary | ios::out);
     dd.write((char*)&(*_N1), sizeof(int));
     dd.write((char*)&(*_N2), sizeof(int));
     dd.write((char*)&(*_a), sizeof(float));
@@ -26,6 +18,11 @@ void LoL::f0(string ss)
     dd.write((char*)&(*_x0), sizeof(float));
     dd.write((char*)&(*_dx), sizeof(float));
     dd.write((char*)&(*_m), sizeof(int));
+}
+
+LoL::~LoL()
+{
+    delete _N1, _N2, _a, _b, _x0, _dx, _m;
 }
 
 void LoL::f1()
